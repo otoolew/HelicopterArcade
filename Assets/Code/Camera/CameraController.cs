@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        target = GetComponentInParent<Starship>().transform;
+        //target = GetComponentInParent<Transform>().transform;
         transform.parent = null;
         transform.Rotate(cameraSettings.tiltAngle);
     }
