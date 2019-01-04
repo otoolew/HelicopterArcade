@@ -15,9 +15,8 @@ public class HelicopterController : MonoBehaviour
     public KeyCodeVariable downKey;
     public KeyCodeVariable leftStrafeKey;
     public KeyCodeVariable rightStrafeKey;
-    public float LiftValue;
+    public float maxVelocity;
     public float ThrustInput;
-    public float StrafeInput;
     public float RotationInput;
 
     public Vector3 EulerAngleVelocity { get; set; }
@@ -41,21 +40,21 @@ public class HelicopterController : MonoBehaviour
     }
     public void HelicopterMovement()
     {
-        RigidBody.AddForce(transform.forward * ThrustInput * 10f);
+        RigidBody.AddForce(transform.forward * ThrustInput * maxVelocity);
         if (leftStrafeKey.KeyPressValue())
-            RigidBody.AddForce(-transform.right * 10f);
+            RigidBody.AddForce(-transform.right * maxVelocity);
         if (rightStrafeKey.KeyPressValue())
-            RigidBody.AddForce(transform.right * 10f);
+            RigidBody.AddForce(transform.right * maxVelocity);
         if (upKey.KeyPressValue())
-            RigidBody.AddForce(transform.up * 10f);
+            RigidBody.AddForce(transform.up * maxVelocity);
         if (downKey.KeyPressValue())
-            RigidBody.AddForce(-transform.up * 10f);
+            RigidBody.AddForce(-transform.up * maxVelocity);
         Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         RigidBody.MoveRotation(RigidBody.rotation * rotation);
 
-        if (RigidBody.velocity.magnitude > 10f)
+        if (RigidBody.velocity.magnitude > maxVelocity)
         {
-            RigidBody.velocity = Vector3.ClampMagnitude(RigidBody.velocity, 10f);
+            RigidBody.velocity = Vector3.ClampMagnitude(RigidBody.velocity, 20f);
         }
     }
 
