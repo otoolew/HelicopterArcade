@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCFighter : MonoBehaviour
 {
-    public Enums.MissionStatus MissionStatus;
+    //public Enums.MissionStatus MissionStatus;
 
     [SerializeField]
     private StarshipNavigation starshipNavigation;
@@ -59,28 +59,28 @@ public class NPCFighter : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(targetController.CurrentTarget != null)
-        {
-            starshipNavigation.GoToPosition(targetController.CurrentTarget.transform.position);
-            MissionStatus = Enums.MissionStatus.ENGAGING;
-        }
+        //if(targetController.CurrentTarget != null)
+        //{
+        //    starshipNavigation.GoToPosition(targetController.CurrentTarget.transform.position);
+        //    //MissionStatus = Enums.MissionStatus.ENGAGING;
+        //}
 
-        switch (MissionStatus)
-        {
-            case Enums.MissionStatus.ENGAGING:
-                starshipNavigation.StopDistance = GetComponentInChildren<WeaponComponent>().WeaponRange;
-                FireWeapon(weaponComponent);
-                break;
-            case Enums.MissionStatus.DEFENDING:
-                DefendPosition();
-                break;
-            case Enums.MissionStatus.PATROLING:
-                starshipNavigation.StopDistance = 1f;
-                ContinuePatrol();               
-                break;
-            default:
-                break;
-        }
+        //switch (MissionStatus)
+        //{
+        //    case Enums.MissionStatus.ENGAGING:
+        //        starshipNavigation.StopDistance = GetComponentInChildren<WeaponComponent>().WeaponRange;
+        //        FireWeapon(weaponComponent);
+        //        break;
+        //    case Enums.MissionStatus.DEFENDING:
+        //        DefendPosition();
+        //        break;
+        //    case Enums.MissionStatus.PATROLING:
+        //        starshipNavigation.StopDistance = 1f;
+        //        ContinuePatrol();               
+        //        break;
+        //    default:
+        //        break;
+        //}
 
     }
 
@@ -88,7 +88,7 @@ public class NPCFighter : MonoBehaviour
     {
         if (targetController.CurrentTarget == null)
         {
-            MissionStatus = Enums.MissionStatus.PATROLING;
+            //MissionStatus = Enums.MissionStatus.PATROLING;
             return;
         }
 
@@ -107,7 +107,7 @@ public class NPCFighter : MonoBehaviour
     {
         if(defensePosition == null)
         {
-            MissionStatus = Enums.MissionStatus.IDLE;
+            //MissionStatus = Enums.MissionStatus.IDLE;
             return;
         }
         starshipNavigation.GoToPosition(defensePosition.position);
@@ -127,7 +127,7 @@ public class NPCFighter : MonoBehaviour
         {
             patrolPoints.Add(resourceField.patrolPoints[i]);
         }
-        MissionStatus = Enums.MissionStatus.DEFENDING;
+        //MissionStatus = Enums.MissionStatus.DEFENDING;
     }
     private void StarshipInit()
     {

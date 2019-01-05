@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPCWorker : MonoBehaviour
 {
     #region Fields and Properties
-    public Enums.MissionStatus MissionStatus;
+    public MissionStatus.CollectorStatus MissionStatus;
 
     [SerializeField]
     private StarshipNavigation starshipNavigation;
@@ -64,7 +64,7 @@ public class NPCWorker : MonoBehaviour
     {
         starshipNavigation = GetComponent<StarshipNavigation>();
         resourceCollector = GetComponent<ResourceCollector>();
-        MissionStatus = Enums.MissionStatus.IDLE;
+        //MissionStatus = MissionStatus.Co;
         StopCoroutine("DeploymentSequence");
         StartCoroutine("DeploymentSequence");
     }
@@ -73,27 +73,27 @@ public class NPCWorker : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.F))
-        //    DoWork();
-        if (resourceCollector.HasPackage)
-            MissionStatus = Enums.MissionStatus.DELIVERING;
+        ////if (Input.GetKeyDown(KeyCode.F))
+        ////    DoWork();
+        //if (resourceCollector.HasPackage)
+        //    MissionStatus = MissionStatus.CollectorStatus.DELIVERING;
 
-        switch (MissionStatus)
-        {
-            case Enums.MissionStatus.REQUEST_ASSIGNMENT:
-                RequestFieldAssignment();
-                break;
-            case Enums.MissionStatus.FETCHING:
-                RequestResourceLocation();
-                break;
-            case Enums.MissionStatus.DELIVERING:
-                starshipNavigation.GoToPosition(resourceDepot.DropPoint.position);
-                if (!resourceCollector.HasPackage)
-                    MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
-                break;
-            default:
-                break;
-        }
+        //switch (MissionStatus)
+        //{
+        //    case MissionStatus.MissionStatus.REQUEST_ASSIGNMENT:
+        //        RequestFieldAssignment();
+        //        break;
+        //    case MissionStatus.MissionStatus.FETCHING:
+        //        RequestResourceLocation();
+        //        break;
+        //    case MissionStatus.MissionStatus.DELIVERING:
+        //        starshipNavigation.GoToPosition(resourceDepot.DropPoint.position);
+        //        if (!resourceCollector.HasPackage)
+        //            MissionStatus = MissionStatus.MissionStatus.REQUEST_ASSIGNMENT;
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
     /// <summary>
     /// All physics calculations and updates occur immediately after FixedUpdate. 
@@ -119,25 +119,25 @@ public class NPCWorker : MonoBehaviour
         {
             starshipNavigation.GoToPosition(fieldAssignment.transform.position);
             fieldAssignment.assignmentCount++;
-            MissionStatus = Enums.MissionStatus.FETCHING;
+            //MissionStatus = Enums.MissionStatus.FETCHING;
             return;
         }
-        MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
+        //MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
     }
     public void RequestResourceLocation()
     {
         if (fieldAssignment != null)
         {
             starshipNavigation.GoToPosition(resourceDepot.ResourceLocation(fieldAssignment));
-            MissionStatus = Enums.MissionStatus.FETCHING;
+            //MissionStatus = Enums.MissionStatus.FETCHING;
             return;
         }
-        MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
+        //MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
     }
 
     IEnumerator DeploymentSequence()
     {
         yield return new WaitForSeconds(1f);
-        MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
+        //MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
     }
 }

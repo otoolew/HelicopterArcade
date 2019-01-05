@@ -8,8 +8,14 @@ public class ResourceDepot : MonoBehaviour
 {
     #region Fields and Properties
     [SerializeField]
-    private Mothership mothership;
+    private MissionCommand missionCommand;
+    public MissionCommand MissionCommand { get => missionCommand; set => missionCommand = value; }
 
+    [SerializeField]
+    private FactionAlignment factionAlignment;
+    public FactionAlignment FactionAlignment { get => factionAlignment; set => factionAlignment = value; }
+
+    public ResourceField[] AllResourceFields;
     public List<ResourceField> AvailableResourceFields;
 
     [SerializeField]
@@ -44,17 +50,17 @@ public class ResourceDepot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        mothership.GetComponentInParent<Mothership>();
-        mothership.resourceFields = FindObjectsOfType<ResourceField>();
+        missionCommand.GetComponentInParent<MissionCommand>();
+        AllResourceFields = FindObjectsOfType<ResourceField>();
         AvailableResourceFields = new List<ResourceField>();
 
-        for (int i = 0; i < mothership.resourceFields.Length; i++)
+        for (int i = 0; i < AllResourceFields.Length; i++)
         {
-            //mothership.resourceFields[i].OnCapture.AddListener(OnFieldCapture);
+            AllResourceFields[i].OnCapture.AddListener(OnFieldCapture);
 
-            if (mothership.resourceFields[i].FactionAlignment == mothership.FactionAlignment)
-                AddToAvailable(mothership.resourceFields[i]);
-        }       
+            if (AllResourceFields[i].FactionAlignment == FactionAlignment)
+                AddToAvailable(AllResourceFields[i]);
+        }
     }
 
     // Update is called once per frame
@@ -85,7 +91,7 @@ public class ResourceDepot : MonoBehaviour
     }
     public void OnFieldCapture(ResourceField resource)
     {
-        if (resource.FactionAlignment == mothership.FactionAlignment)
+        if (resource.FactionAlignment == FactionAlignment)
             AddToAvailable(resource);
         else
             RemoveFromAvailable(resource);
@@ -100,6 +106,12 @@ public class ResourceDepot : MonoBehaviour
         if (AvailableResourceFields.Contains(field))
             AvailableResourceFields.Remove(field);
     }
+    public bool RecieveFieldRequest(IResourceCollector resourceCollector)
+    {
+        //TODO: IMPLEMENT
+        Debug.Log("NOT IMPLEMENTED");
+        return false;
+    } 
     #endregion
 
 }
