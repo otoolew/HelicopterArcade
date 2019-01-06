@@ -7,11 +7,11 @@ public class ResourceCollector : MonoBehaviour
 {
     #region Fields and Properties
     [SerializeField]
-    private Starship starship;
-    public Starship Starship
+    private Collider collectCollider;
+    public Collider CollectCollider
     {
-        get { return starship; }
-        private set { starship = value; }
+        get { return collectCollider; }
+        private set { collectCollider = value; }
     }
     [SerializeField]
     private ResourcePack currentResource;
@@ -36,7 +36,6 @@ public class ResourceCollector : MonoBehaviour
     #region Monobehaviour
     private void Start()
     {
-        starship = GetComponent<Starship>();
     }
     private void Update()
     {
@@ -44,8 +43,8 @@ public class ResourceCollector : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (hasPackage || starship.Dead)        
-            return;
+        //if (hasPackage || starship.Dead)        
+        //    return;
         
         if (!other.tag.Equals("Resource"))
             return;
@@ -69,14 +68,14 @@ public class ResourceCollector : MonoBehaviour
         resourcePack.TakeClaim(this);
         currentResource = resourcePack;
         resourcePack.PackageClaimed = true;
-        starship.removed += HandleDeath;
+        //starship.removed += HandleDeath;
     }
     public void ReleasePackage()
     {
         hasPackage = false;
         CurrentResource.ReturnResourcePack();
         CurrentResource = null;
-        starship.removed -= HandleDeath;
+        //starship.removed -= HandleDeath;
     }
     private void HandleDeath(Starship starship)
     {

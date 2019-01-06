@@ -22,7 +22,7 @@ public class Munition : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        owningFaction = GetComponentInParent<WeaponComponent>().FactionAlignment;
+        //owningFaction = GetComponentInParent<WeaponComponent>().FactionAlignment;
         transform.parent = null;            // Unparent the bullet so it does not follow the Tank that fired it.
         Destroy(gameObject, munitionRange);      // Destroy me after a specified time.
     }

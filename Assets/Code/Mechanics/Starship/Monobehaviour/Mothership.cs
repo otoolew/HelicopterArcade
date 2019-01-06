@@ -93,7 +93,7 @@ public class Mothership : MonoBehaviour
         fighter.GetComponent<Faction>().Mothership = this;
         fighter.GetComponent<Faction>().FactionAlignment = FactionAlignment;
         fighter.RecieveDistressCall(resourceDepot.RequestFieldAssignment());
-        fighter.MissionStatus = Enums.MissionStatus.PATROLING;
+        //fighter.MissionStatus = Enums.MissionStatus.PATROLING;
     }
 
 }

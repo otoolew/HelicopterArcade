@@ -6,7 +6,7 @@ public class NPCDefender : MonoBehaviour {
 
     #region Fields and Properties
 
-    public Enums.MissionStatus MissionStatus;
+
 
     [SerializeField]
     private StarshipNavigation starshipNavigation;
@@ -51,7 +51,7 @@ public class NPCDefender : MonoBehaviour {
     private void Start()
     {
         starshipNavigation = GetComponent<StarshipNavigation>();
-        MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
+        //MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
     }
     /// <summary>
     /// Update is called once per frame. It is the main workhorse function for frame updates.
@@ -83,15 +83,15 @@ public class NPCDefender : MonoBehaviour {
 
     public void RequestFieldAssignment()
     {
-        fieldAssignment = GetComponent<Faction>().Mothership.ResourceDepot.RequestFieldAssignment();
-        if (fieldAssignment != null)
-        {
-            starshipNavigation.GoToPosition(fieldAssignment.transform.position);
-            //starshipNavigation.GoToPosition(fieldAssignment.transform.position + new Vector3(0,0,0));
-            MissionStatus = Enums.MissionStatus.DEFENDING;
-            return;
-        }
-        MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
+        //fieldAssignment = GetComponent<Faction>().Mothership.ResourceDepot.RequestFieldAssignment();
+        //if (fieldAssignment != null)
+        //{
+        //    starshipNavigation.GoToPosition(fieldAssignment.transform.position);
+        //    //starshipNavigation.GoToPosition(fieldAssignment.transform.position + new Vector3(0,0,0));
+        //    MissionStatus = Enums.MissionStatus.DEFENDING;
+        //    return;
+        //}
+        //MissionStatus = Enums.MissionStatus.REQUEST_ASSIGNMENT;
     }
 
 }
