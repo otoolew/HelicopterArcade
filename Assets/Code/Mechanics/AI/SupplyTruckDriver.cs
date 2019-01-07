@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class SupplyTruckDriver : MonoBehaviour, IResourceCollector
+public class SupplyTruckDriver : MonoBehaviour
 {
     #region Fields and Properties
     
     [SerializeField]
-    private NavMeshAgent navMesh;
-    public NavMeshAgent NavAgent { get => navMesh; set => navMesh = value; }
+    private NavMeshAgent navAgent;
+    public NavMeshAgent NavAgent { get => navAgent; set => navAgent = value; }
 
     [SerializeField]
     private MissionCommand missionCommand;
@@ -28,6 +28,10 @@ public class SupplyTruckDriver : MonoBehaviour, IResourceCollector
     private ResourceField resourceField;
     public ResourceField ResourceField { get => resourceField; set => resourceField = value; }
 
+    //[SerializeField]
+    //private Transform currentNavPoint;
+    //public Transform CurrentNavPoint { get => currentNavPoint; set => currentNavPoint = value; }
+
     [SerializeField]
     private int maxResourceCapacity;
     public int MaxResourceCapacity { get => maxResourceCapacity; set => maxResourceCapacity = value; }
@@ -36,50 +40,72 @@ public class SupplyTruckDriver : MonoBehaviour, IResourceCollector
     private int currentResourceAmount;
     public int CurrentResourceAmount { get => currentResourceAmount; set => currentResourceAmount = value; }
 
+    public List<Transform> waypointList;
+    [SerializeField]
+    private int currentWaypoint = 0;
+
+
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         collectorStatus = MissionStatus.CollectorStatus.DEPLOYING;
+        RequestFieldAssignment();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(IsEmpty())
-            collectorStatus = MissionStatus.CollectorStatus.IDLE;
-        if(IsFull())
-            collectorStatus = MissionStatus.CollectorStatus.DELIVERING;
-        switch (CollectorStatus)
+        switch (collectorStatus)
         {
             case MissionStatus.CollectorStatus.DEPLOYING:
-                // TODO: IMPLEMENT               
                 break;
             case MissionStatus.CollectorStatus.IDLE:
                 RequestFieldAssignment();
                 break;
             case MissionStatus.CollectorStatus.FETCHING:
+                if (DistanceToDestination() <= navAgent.stoppingDistance)
+                {
+                    GoToNextWayPoint();
+                }
+                //navAgent.SetDestination();
                 // TODO: Check Path Validity
                 break;
             case MissionStatus.CollectorStatus.LOADING:
                 // TODO: Stop in Field
                 break;
             case MissionStatus.CollectorStatus.DELIVERING:
-                // TODO: Check Path Validity
+                if (!navAgent.hasPath)
+                    navAgent.SetDestination(resourceDepot.transform.position);
                 break;
             case MissionStatus.CollectorStatus.UNLOADING:
                 // TODO: Stop in Depot
                 break;
             default:
+                Debug.Log("Break!");
                 break;
         }
+
     }
     #region IResourceCollector
     public void RequestFieldAssignment()
     {
-        if (resourceDepot.RecieveFieldRequest(this))
+        waypointList.Clear();
+        resourceField = resourceDepot.RecieveFieldAssignment();
+        if (resourceField != null)
         {
+            foreach (var navPoint in resourceField.navPointArray)
+            {
+                waypointList.Add(navPoint.transform);
+            }
+            foreach (var navPoint in resourceDepot.navPointArray)
+            {
+                waypointList.Add(navPoint.transform);
+            }
+
+            navAgent.SetDestination(waypointList[0].transform.position);
+
             collectorStatus = MissionStatus.CollectorStatus.FETCHING;
         }
         else
@@ -91,9 +117,13 @@ public class SupplyTruckDriver : MonoBehaviour, IResourceCollector
     {
         Debug.Log("Loading Resources");
     }
-
+    public void ReturnToDepot()
+    {
+        //currentNavPoint = resourceDepot.DropPoint;
+    }
     public void DeliverResource()
     {
+        navAgent.SetDestination(resourceDepot.transform.position);
         collectorStatus = MissionStatus.CollectorStatus.DELIVERING;
     }
 
@@ -118,7 +148,39 @@ public class SupplyTruckDriver : MonoBehaviour, IResourceCollector
         }
         return false;
     }
+
+
+
     #endregion
+    public float DistanceToDestination()
+    {
+        return Vector3.Distance(navAgent.destination, transform.position);
+    }
+    public void GoToNextWayPoint()
+    {
+        // Returns if no points have been set up
+        if (waypointList.Count == 0)
+            return;
+        currentWaypoint = (currentWaypoint + 1) % waypointList.Count;
+        // Set the agent to go to the currently selected destination.
+        navAgent.destination = waypointList[currentWaypoint].position;
 
+    }
+    public void GoToPosition(Vector3 position)
+    {
+        if (!navAgent.isActiveAndEnabled)
+            return;
 
+        navAgent.isStopped = false;
+        navAgent.destination = position;
+    }
+    public void ClearNavAgentPath()
+    {
+        navAgent.ResetPath();
+    }
+    public void ActivateNavAgent()
+    {
+        navAgent = GetComponent<NavMeshAgent>();
+        navAgent.enabled = true;
+    }
 }

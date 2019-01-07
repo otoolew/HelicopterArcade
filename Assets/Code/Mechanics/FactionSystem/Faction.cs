@@ -13,7 +13,7 @@ public class Faction : MonoBehaviour
     }
 
     public string FactionName { get { return FactionAlignment.factionName; } }
-    public Mothership Mothership { get; set; }
+
 
     public void ChangeFaction(FactionAlignment newFaction)
     {

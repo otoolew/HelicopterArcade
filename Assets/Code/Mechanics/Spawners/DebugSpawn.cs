@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugSpawn : MonoBehaviour
 {
-    public Starship starshipPrefab;
+    public GameObject goPrefab;
     public FactionAlignment faction;
     // Start is called before the first frame update
     void Start()
@@ -20,8 +20,8 @@ public class DebugSpawn : MonoBehaviour
     }
     void SpawnObject()
     {
-        starshipPrefab.GetComponent<Faction>().FactionAlignment = faction;
-        Starship ship = Instantiate(starshipPrefab, transform);
+        goPrefab.GetComponent<Faction>().FactionAlignment = faction;
+        GameObject ship = Instantiate(goPrefab, transform);
         ship.transform.parent = null;
     }
 }

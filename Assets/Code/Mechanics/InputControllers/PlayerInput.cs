@@ -11,13 +11,13 @@ public class PlayerInput : MonoBehaviour
         get { return rigidBody; }
         private set { rigidBody = value; }
     }
-    [SerializeField]
-    private Starship starship;
-    public Starship Starship
-    {
-        get { return starship; }
-        private set { starship = value; }
-    }
+    //[SerializeField]
+    //private Starship starship;
+    //public Starship Starship
+    //{
+    //    get { return starship; }
+    //    private set { starship = value; }
+    //}
     [SerializeField]
     private WeaponController weaponController;
     public WeaponController WeaponController
@@ -77,7 +77,7 @@ public class PlayerInput : MonoBehaviour
     {
         rigidBody = GetComponentInParent<Rigidbody>();
         //weaponController.WeaponComponents = GetComponentsInChildren<WeaponComponent>(); <- Prefab set for now
-        EulerAngleVelocity = new Vector3(0, Starship.HullComponent.RotationSpeed, 0);
+        //EulerAngleVelocity = new Vector3(0, Starship.HullComponent.RotationSpeed, 0);
         GameManager.Instance.OnGameStateChanged.AddListener(HandleGameStateChanged);
     }
 	
@@ -118,14 +118,14 @@ public class PlayerInput : MonoBehaviour
     }
     public void AccelerateStarship()
     {
-        if (ThrustInput >= 0)
-            RigidBody.AddForce(transform.forward * ThrustInput * Starship.EngineComponent.EnginePower);
+        //if (ThrustInput >= 0)
+        //    RigidBody.AddForce(transform.forward * ThrustInput * Starship.EngineComponent.EnginePower);
 
-        // Limit Speed
-        if (RigidBody.velocity.magnitude > Starship.EngineComponent.EnginePower)
-        {
-            RigidBody.velocity = Vector3.ClampMagnitude(RigidBody.velocity, Starship.EngineComponent.EnginePower);
-        }
+        //// Limit Speed
+        //if (RigidBody.velocity.magnitude > Starship.EngineComponent.EnginePower)
+        //{
+        //    RigidBody.velocity = Vector3.ClampMagnitude(RigidBody.velocity, Starship.EngineComponent.EnginePower);
+        //}
     }
 
     public void RotateStarship()
