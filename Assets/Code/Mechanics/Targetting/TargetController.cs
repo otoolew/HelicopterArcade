@@ -35,8 +35,8 @@ public class TargetController : MonoBehaviour
         private set { searchTimer = value; }
     }
     [SerializeField]
-    private Starship currentTarget;
-    public Starship CurrentTarget
+    private UnitActor currentTarget;
+    public UnitActor CurrentTarget
     {
         get { return currentTarget; }
         private set { currentTarget = value; }
@@ -67,17 +67,17 @@ public class TargetController : MonoBehaviour
     /// <summary>
     /// Fires when a targetable enters the target collider
     /// </summary>
-    public event Action<Starship> targetEntersRange;
+    public event Action<UnitActor> targetEntersRange;
 
     /// <summary>
     /// Fires when a targetable exits the target collider
     /// </summary>
-    public event Action<Starship> targetExitsRange;
+    public event Action<UnitActor> targetExitsRange;
 
     /// <summary>
     /// Fires when an appropriate target is found
     /// </summary>
-    public event Action<Starship> acquiredTarget;
+    public event Action<UnitActor> acquiredTarget;
 
     /// <summary>
     /// Fires when the current target was lost
@@ -87,7 +87,7 @@ public class TargetController : MonoBehaviour
     /// <summary>
     /// The current targetables in the collider
     /// </summary>
-    public List<Starship> targetsInRange = new List<Starship>();
+    public List<UnitActor> targetsInRange = new List<UnitActor>();
     /// <summary>
     /// Starts the search timer
     /// </summary>
@@ -129,7 +129,7 @@ public class TargetController : MonoBehaviour
     {
         try
         {
-            var targetable = other.GetComponentInParent<Starship>();
+            var targetable = other.GetComponentInParent<UnitActor>();
             if (!IsTargetableValid(targetable))
             {
                 return;
@@ -152,7 +152,7 @@ public class TargetController : MonoBehaviour
     /// <param name="other">The other collider in the collision</param>
     private void OnTriggerExit(Collider other)
     {
-        var targetable = other.GetComponentInParent<Starship>();
+        var targetable = other.GetComponentInParent<UnitActor>();
         if (!IsTargetableValid(targetable))
         {
             return;
@@ -177,7 +177,7 @@ public class TargetController : MonoBehaviour
     /// <summary>
     /// Returns the current target
     /// </summary>
-    public Starship GetTarget()
+    public UnitActor GetTarget()
     {
         return CurrentTarget;
     }
@@ -200,7 +200,7 @@ public class TargetController : MonoBehaviour
     /// Returns all the targets within the collider. This list must not be changed as it is the working
     /// list of the targetter. Changing it could break the targetter
     /// </summary>
-    public List<Starship> GetAllTargets()
+    public List<UnitActor> GetAllTargets()
     {
         return targetsInRange;
     }
@@ -210,7 +210,7 @@ public class TargetController : MonoBehaviour
     /// </summary>
     /// <param name="targetable"></param>
     /// <returns>true if targetable is vaild, false if not</returns>
-    public bool IsTargetableValid(Starship targetable)
+    public bool IsTargetableValid(UnitActor targetable)
     {
         if (targetable == null)      
             return false;
@@ -223,7 +223,7 @@ public class TargetController : MonoBehaviour
     /// Returns the nearest targetable within the currently tracked targetables 
     /// </summary>
     /// <returns>The nearest targetable if there is one, null otherwise</returns>
-    public Starship GetNearestTargetable()
+    public UnitActor GetNearestTargetable()
     {
         int length = targetsInRange.Count;
 
@@ -232,11 +232,11 @@ public class TargetController : MonoBehaviour
             return null;
         }
 
-        Starship nearest = null;
+        UnitActor nearest = null;
         float distance = float.MaxValue;
         for (int i = length - 1; i >= 0; i--)
         {
-            Starship targetable = targetsInRange[i];
+            UnitActor targetable = targetsInRange[i];
             if (targetable == null || targetable.Dead)
             {
                 targetsInRange.RemoveAt(i);
@@ -259,7 +259,7 @@ public class TargetController : MonoBehaviour
     /// Fired by the agents died event or when the current target moves out of range,
     /// Fires the lostTarget event.
     /// </summary>
-    void OnTargetRemoved(Starship target)
+    void OnTargetRemoved(UnitActor target)
     {
         target.removed -= OnTargetRemoved;
         if (CurrentTarget != null && target == CurrentTarget)
