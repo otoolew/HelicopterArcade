@@ -56,6 +56,14 @@ public class ResourceField : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        SupplyTruckDriver supplyTruck = other.GetComponentInParent<SupplyTruckDriver>();
+        if (supplyTruck == null)
+            return;
+        supplyTruck.LoadResources();
+        currentResourceAmount--;
+    }
     #endregion
 
 

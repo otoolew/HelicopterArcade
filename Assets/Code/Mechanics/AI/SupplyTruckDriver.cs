@@ -28,10 +28,6 @@ public class SupplyTruckDriver : MonoBehaviour
     private ResourceField resourceField;
     public ResourceField ResourceField { get => resourceField; set => resourceField = value; }
 
-    //[SerializeField]
-    //private Transform currentNavPoint;
-    //public Transform CurrentNavPoint { get => currentNavPoint; set => currentNavPoint = value; }
-
     [SerializeField]
     private int maxResourceCapacity;
     public int MaxResourceCapacity { get => maxResourceCapacity; set => maxResourceCapacity = value; }
@@ -40,9 +36,16 @@ public class SupplyTruckDriver : MonoBehaviour
     private int currentResourceAmount;
     public int CurrentResourceAmount { get => currentResourceAmount; set => currentResourceAmount = value; }
 
-    public List<Transform> waypointList;
+    [SerializeField]
+    private float resourceLoadWait;
+    public float ResourceLoadWait { get => resourceLoadWait; set => resourceLoadWait = value; }
+
     [SerializeField]
     private int currentWaypoint = 0;
+    public int CurrentWaypoint { get => currentWaypoint; set => currentWaypoint = value; }
+
+    public List<Transform> waypointList;
+
 
 
     #endregion
@@ -69,8 +72,6 @@ public class SupplyTruckDriver : MonoBehaviour
                 {
                     GoToNextWayPoint();
                 }
-                //navAgent.SetDestination();
-                // TODO: Check Path Validity
                 break;
             case MissionStatus.CollectorStatus.LOADING:
                 // TODO: Stop in Field
@@ -87,6 +88,37 @@ public class SupplyTruckDriver : MonoBehaviour
                 break;
         }
 
+    }
+    public float DistanceToDestination()
+    {
+        return Vector3.Distance(navAgent.destination, transform.position);
+    }
+    public void GoToNextWayPoint()
+    {
+        // Returns if no points have been set up
+        if (waypointList.Count == 0)
+            return;
+        currentWaypoint = (currentWaypoint + 1) % waypointList.Count;
+        // Set the agent to go to the currently selected destination.
+        navAgent.destination = waypointList[currentWaypoint].position;
+
+    }
+    public void GoToPosition(Vector3 position)
+    {
+        if (!navAgent.isActiveAndEnabled)
+            return;
+
+        navAgent.isStopped = false;
+        navAgent.destination = position;
+    }
+    public void ClearNavAgentPath()
+    {
+        navAgent.ResetPath();
+    }
+    public void ActivateNavAgent()
+    {
+        navAgent = GetComponent<NavMeshAgent>();
+        navAgent.enabled = true;
     }
     #region IResourceCollector
     public void RequestFieldAssignment()
@@ -113,10 +145,7 @@ public class SupplyTruckDriver : MonoBehaviour
            collectorStatus = MissionStatus.CollectorStatus.IDLE;
         }           
     }
-    public void LoadResource()
-    {
-        Debug.Log("Loading Resources");
-    }
+
     public void ReturnToDepot()
     {
         //currentNavPoint = resourceDepot.DropPoint;
@@ -149,38 +178,34 @@ public class SupplyTruckDriver : MonoBehaviour
         return false;
     }
 
+    public void LoadResources()
+    {
+        StopAllCoroutines();
+        StartCoroutine(LoadingSequence());
+    }
+    public void UnloadResources()
+    {
+        StopAllCoroutines();
+        StartCoroutine(UnloadingSequence());
+    }
 
+    IEnumerator LoadingSequence()
+    {
+        Debug.Log("Loading");
+        navAgent.isStopped = true;
+        yield return new WaitForSeconds(resourceLoadWait);
+        currentResourceAmount++;
+        navAgent.isStopped = false;
+    }
+    IEnumerator UnloadingSequence()
+    {
+        Debug.Log("Unloading");
+        navAgent.isStopped = true;
+        yield return new WaitForSeconds(resourceLoadWait);
+        currentResourceAmount--;
+        navAgent.isStopped = false;
+    }
 
     #endregion
-    public float DistanceToDestination()
-    {
-        return Vector3.Distance(navAgent.destination, transform.position);
-    }
-    public void GoToNextWayPoint()
-    {
-        // Returns if no points have been set up
-        if (waypointList.Count == 0)
-            return;
-        currentWaypoint = (currentWaypoint + 1) % waypointList.Count;
-        // Set the agent to go to the currently selected destination.
-        navAgent.destination = waypointList[currentWaypoint].position;
 
-    }
-    public void GoToPosition(Vector3 position)
-    {
-        if (!navAgent.isActiveAndEnabled)
-            return;
-
-        navAgent.isStopped = false;
-        navAgent.destination = position;
-    }
-    public void ClearNavAgentPath()
-    {
-        navAgent.ResetPath();
-    }
-    public void ActivateNavAgent()
-    {
-        navAgent = GetComponent<NavMeshAgent>();
-        navAgent.enabled = true;
-    }
 }

@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 441292}
   - component: {fileID: 3310514}
   - component: {fileID: 2385620}
+  - component: {fileID: 5170664824670761759}
   m_Layer: 0
   m_Name: SM_Prop_Wall_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &441292
 Transform:
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5170664824670761759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.013344, y: 5.551568, z: 1.5328943}
+  m_Center: {x: 2.3674545, y: 2.775784, z: 0.7664471}
