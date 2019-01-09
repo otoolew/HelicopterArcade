@@ -21,20 +21,9 @@ public class ResourceDepot : MonoBehaviour
     public List<ResourceField> AvailableResourceFields;
 
     [SerializeField]
-    private int resourceAmount;
-    public int ResourceAmount
-    {
-        get { return resourceAmount; }
-        set { resourceAmount = value; }
-    }
+    private int totalResources;
+    public int TotalResources { get => totalResources; set => totalResources = value; }
 
-    [SerializeField]
-    private Transform dropPoint;
-    public Transform DropPoint
-    {
-        get { return dropPoint; }
-        set { dropPoint = value; }
-    }
 
     #endregion
     #region Events
@@ -70,7 +59,14 @@ public class ResourceDepot : MonoBehaviour
     {
         //resourceLabel.text = resourceAmount.ToString();
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        SupplyTruckDriver supplyTruck = other.GetComponentInParent<SupplyTruckDriver>();
+        if (supplyTruck == null)
+            return;
+        supplyTruck.UnloadResources();
+        totalResources++;
+    }
     public void OnFieldCapture(ResourceField resource)
     {
         if (resource.FactionAlignment == FactionAlignment)
