@@ -25,9 +25,10 @@ public class WeaponController : MonoBehaviour
     }
     private void Update()
     {
+        AimPoint();
         if (Input.GetMouseButtonDown(0))
             Fire();
-        AimPoint();
+
     }
     [SerializeField]
     private WeaponComponent[] weaponComponents;
@@ -40,9 +41,8 @@ public class WeaponController : MonoBehaviour
     {
         //Vector3 mousePosition = new Vector3(Input.mousePosition.x, transform.position.y, Input.mousePosition.z);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out rayHit, layerMask))
+        if (Physics.Raycast(ray, out RaycastHit rayHit, layerMask))
         {
-
             Vector3 hitPoint = rayHit.point;
 
             Vector3 targetDir = hitPoint - equippedWeapon.transform.position;

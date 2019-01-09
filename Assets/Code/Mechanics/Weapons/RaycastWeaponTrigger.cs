@@ -6,8 +6,6 @@ using UnityEngine.Events;
 public class RaycastWeaponTrigger : WeaponComponent
 {
     LineRenderer lineRenderer;
-    Ray ray;
-    RaycastHit rayHit;
     public float RayRange;
     public LayerMask LayerRayMask;
     public float effectDuration = 0.1f;
@@ -28,21 +26,19 @@ public class RaycastWeaponTrigger : WeaponComponent
     }
     IEnumerator FireFX()
     {
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, FirePoint.transform.position);
-        ray.origin = FirePoint.transform.position;
-        ray.direction = FirePoint.transform.forward;
-
-        if (Physics.Raycast(ray, out rayHit, RayRange, LayerRayMask))
+        Vector3 startPos = FirePoint.transform.position;
+        Vector3 endPos = FirePoint.transform.forward * RayRange;
+        Debug.DrawRay(startPos, endPos);
+        if (Physics.Raycast(startPos, endPos, out RaycastHit rayHit, RayRange, LayerRayMask))
         {
-            //Debug.Log("Debug RayHit: " + rayHit.collider.name);
-            OnRayHit.Invoke();
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, startPos);
             lineRenderer.SetPosition(1, rayHit.point);
+            Debug.Log(rayHit.collider.gameObject.name + " TODO: Implement Damage");
         }
         else
         {
-            lineRenderer.SetPosition(1, ray.origin + ray.direction * RayRange);
-            //Debug.Log("Debug RayHit: NOTHING");
+            lineRenderer.SetPosition(1, endPos);
         }
         yield return new WaitForSeconds(effectDuration);
         lineRenderer.enabled = false;
