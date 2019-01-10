@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7582423897748912506}
   - component: {fileID: 8898660985008921858}
-  - component: {fileID: 5723646779911171104}
   - component: {fileID: 8367918665030232762}
   m_Layer: 0
   m_Name: InfantryTroop
@@ -53,24 +52,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &5723646779911171104
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2940460036748212793}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2.5
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &8367918665030232762
 MonoBehaviour:
   m_ObjectHideFlags: 0
