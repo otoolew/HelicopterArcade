@@ -13,6 +13,7 @@ public class UnitActor : MonoBehaviour
     [SerializeField]
     private bool dead;
     public bool Dead { get => dead; set => dead = value; }
+
     #region Events and Handlers
     public event Action<UnitActor> removed;
     public UnityEvent OnUnitActorDeath;
