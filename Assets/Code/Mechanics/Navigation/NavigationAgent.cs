@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(NavMeshAgent)]
+[RequireComponent(typeof(NavMeshAgent))]
 public class NavigationAgent : MonoBehaviour
 {
     #region Fields and Properties
