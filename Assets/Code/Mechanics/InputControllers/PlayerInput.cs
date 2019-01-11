@@ -90,9 +90,9 @@ public class PlayerInput : MonoBehaviour
         primaryWeaponFire = Input.GetKeyDown(primaryWeaponKey);
         secondaryWeaponFire = Input.GetKeyDown(secondaryWeaponKey);
         if (PrimaryWeaponFire)
-            WeaponController.WeaponComponents[0].Fire();
+            WeaponController.WeaponComponents[0].FireWeapon();
         if (SecondaryWeaponFire)
-            WeaponController.WeaponComponents[1].Fire();
+            WeaponController.WeaponComponents[1].FireWeapon();
 
     }
     void FixedUpdate()

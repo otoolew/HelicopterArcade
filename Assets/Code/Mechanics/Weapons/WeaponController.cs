@@ -6,7 +6,6 @@ public class WeaponController : MonoBehaviour
 {
     Ray ray;
     RaycastHit rayHit = new RaycastHit();
-
     public LayerMask layerMask;
     [SerializeField]
     private WeaponComponent equippedWeapon;
@@ -57,6 +56,6 @@ public class WeaponController : MonoBehaviour
     }
     public void Fire()
     {
-        equippedWeapon.Fire();
+        equippedWeapon.FireWeapon();
     }
 }

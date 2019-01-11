@@ -4,38 +4,17 @@ using UnityEngine;
 
 public abstract class WeaponComponent : MonoBehaviour
 {
-    #region Variable Declarations
     [SerializeField]
     private WeaponSchematic weaponSchematic;
-    public WeaponSchematic WeaponSchematic
-    {
-        get { return weaponSchematic; }
-        set { weaponSchematic = value; }
-    }
-    public float WeaponDamage { get; set; }
-    public float WeaponCooldown { get; set; }
-    public float WeaponRange { get; set; }
-    public float WeaponTimer { get; set; }
-    public bool WeaponReady { get; set; }
+    public WeaponSchematic WeaponSchematic { get => weaponSchematic; set => weaponSchematic = value; }
 
-    [SerializeField]
-    private Transform firePoint;
-    public Transform FirePoint
-    {
-        get { return firePoint; }
-        set { firePoint = value; }
-    }
+    public abstract float WeaponDamage { get; set; }
+    public abstract float WeaponRange { get; set; }
+    public abstract float WeaponCooldown { get; set; }
+    public abstract float WeaponTimer { get; set; }
+    public abstract bool WeaponReady { get; set; }
 
-    #endregion
-    #region Events
+    public abstract void CooldownWeapon();
 
-    #endregion
-
-    #region Monobehaviour
-
-    #endregion
-
-    protected abstract void CooldownWeapon();
-    public abstract void Fire();
-
+    public abstract void FireWeapon();
 }

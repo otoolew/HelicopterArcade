@@ -10,6 +10,7 @@ public class RaycastWeaponSchematic : WeaponSchematic
         weaponComponent.WeaponDamage = WeaponDamage;
         weaponComponent.WeaponRange = WeaponRange;
         weaponComponent.WeaponCooldown = WeaponCooldown;
+        weaponComponent.WeaponTimer = WeaponCooldown;
     }
 
     public override void CooldownWeapon(WeaponComponent weaponComponent)
@@ -28,6 +29,6 @@ public class RaycastWeaponSchematic : WeaponSchematic
     }
     public override void FireWeapon(WeaponComponent weaponComponent)
     {
-        weaponComponent.Fire();
+        weaponComponent.FireWeapon();
     }
 }

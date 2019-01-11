@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            GetComponentInChildren<WeaponComponent>().Fire();
+            GetComponentInChildren<WeaponComponent>().FireWeapon();
         }
 	}
 }

@@ -5,65 +5,27 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
+    #region Fields and Properties
     [SerializeField]
     private FactionAlignment faction;
-    public FactionAlignment Faction
-    {
-        get { return faction; }
-        private set { faction = value; }
-    }
-    //[SerializeField]
-    //private NPCFighter fighter;
-    //public NPCFighter Fighter
-    //{
-    //    get { return fighter; }
-    //    private set { fighter = value; }
-    //}
+    public FactionAlignment Faction { get => faction; set => faction = value; }
 
     [SerializeField]
     private float searchRate;
-    public float SearchRate
-    {
-        get { return searchRate; }
-        private set { searchRate = value; }
-    }
+    public float SearchRate { get => searchRate; set => searchRate = value; }
+
     [SerializeField]
     private float searchTimer;
-    public float SearchTimer
-    {
-        get { return searchTimer; }
-        private set { searchTimer = value; }
-    }
+    public float SearchTimer { get => searchTimer; set => searchTimer = value; }
+
     [SerializeField]
     private UnitActor currentTarget;
-    public UnitActor CurrentTarget
-    {
-        get { return currentTarget; }
-        private set { currentTarget = value; }
-    }
+    public UnitActor CurrentTarget { get => currentTarget; set => currentTarget = value; }
 
     [SerializeField]
     private bool hadTarget;
-    public bool HadTarget
-    {
-        get { return hadTarget; }
-        private set { hadTarget = value; }
-    }
-    //[SerializeField]
-    //private SphereCollider triggerCollider;
-    //public SphereCollider TriggerCollider
-    //{
-    //    get { return triggerCollider; }
-    //    private set { triggerCollider = value; }
-    //}
-    [SerializeField]
-    private float scanRadius;
-    public float ScanRadius
-    {
-        get { return scanRadius; }
-        private set { scanRadius = value; }
-    }
-
+    public bool HadTarget { get => hadTarget; set => hadTarget = value; }
+    #endregion
     /// <summary>
     /// Fires when a targetable enters the target collider
     /// </summary>
@@ -93,9 +55,9 @@ public class TargetController : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        Faction = GetComponentInParent<Faction>().FactionAlignment;
+        //Faction = GetComponentInParent<Faction>().FactionAlignment;
         searchTimer = searchRate;
-        GetComponent<SphereCollider>().radius = scanRadius;
+        //GetComponent<SphereCollider>().radius = scanRadius;
     }
 
     /// <summary>
@@ -111,10 +73,7 @@ public class TargetController : MonoBehaviour
             CurrentTarget = GetNearestTargetable();
             if (CurrentTarget != null)
             {
-                if (acquiredTarget != null)
-                {
-                    acquiredTarget(CurrentTarget);
-                }
+                acquiredTarget?.Invoke(CurrentTarget);
                 searchTimer = searchRate;
             }
         }
@@ -136,10 +95,7 @@ public class TargetController : MonoBehaviour
             }
             targetable.removed += OnTargetRemoved;
             targetsInRange.Add(targetable);
-            if (targetEntersRange != null)
-            {
-                targetEntersRange(targetable);
-            }
+            targetEntersRange?.Invoke(targetable);
         }
         catch (NullReferenceException)
         {
@@ -159,10 +115,7 @@ public class TargetController : MonoBehaviour
         }
 
         targetsInRange.Remove(targetable);
-        if (targetExitsRange != null)
-        {
-            targetExitsRange(targetable);
-        }
+        targetExitsRange?.Invoke(targetable);
         if (targetable == CurrentTarget)
         {
             OnTargetRemoved(targetable);
@@ -214,9 +167,9 @@ public class TargetController : MonoBehaviour
     {
         if (targetable == null)      
             return false;
-        if (targetable.GetComponent<Faction>() == null)
-            return false;
-        return Faction.CanHarm(targetable.GetComponent<Faction>().FactionAlignment);
+        //if (targetable.GetComponent<Faction>() == null)
+        //    return false;
+        return Faction.CanHarm(targetable.Faction);
     }
 
     /// <summary>
@@ -264,10 +217,7 @@ public class TargetController : MonoBehaviour
         target.removed -= OnTargetRemoved;
         if (CurrentTarget != null && target == CurrentTarget)
         {
-            if (lostTarget != null)
-            {
-                lostTarget();
-            }
+            lostTarget?.Invoke();
             HadTarget = false;
             targetsInRange.Remove(CurrentTarget);
             CurrentTarget = null;
