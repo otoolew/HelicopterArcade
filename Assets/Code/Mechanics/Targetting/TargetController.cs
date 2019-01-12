@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TargetController : MonoBehaviour
 {
@@ -40,12 +41,12 @@ public class TargetController : MonoBehaviour
     /// Fires when an appropriate target is found
     /// </summary>
     public event Action<UnitActor> acquiredTarget;
-
+    public Events.AcquiredTarget OnAcquiredTarget;
     /// <summary>
     /// Fires when the current target was lost
     /// </summary>
     public event Action lostTarget;
-
+    public Events.LostTarget OnLostTarget;
     /// <summary>
     /// The current targetables in the collider
     /// </summary>
@@ -73,6 +74,7 @@ public class TargetController : MonoBehaviour
             CurrentTarget = GetNearestTargetable();
             if (CurrentTarget != null)
             {
+                OnAcquiredTarget.Invoke(CurrentTarget);
                 acquiredTarget?.Invoke(CurrentTarget);
                 searchTimer = searchRate;
             }
@@ -217,6 +219,7 @@ public class TargetController : MonoBehaviour
         target.removed -= OnTargetRemoved;
         if (CurrentTarget != null && target == CurrentTarget)
         {
+            OnLostTarget.Invoke();
             lostTarget?.Invoke();
             HadTarget = false;
             targetsInRange.Remove(CurrentTarget);

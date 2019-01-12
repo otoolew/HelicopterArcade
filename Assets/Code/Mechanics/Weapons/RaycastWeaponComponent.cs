@@ -11,8 +11,8 @@ public class RaycastWeaponComponent : WeaponComponent
     public LineRenderer LineRenderer { get => lineRenderer; set => lineRenderer = value; }
 
     [SerializeField]
-    private float weaponDamage;
-    public override float WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
+    private int weaponDamage;
+    public override int WeaponDamage { get => weaponDamage; set => weaponDamage = value; }
 
     [SerializeField]
     private float weaponCooldown;
@@ -59,26 +59,32 @@ public class RaycastWeaponComponent : WeaponComponent
 
     public override void FireWeapon()
     {
+        Vector3 startPos = FirePoint.transform.localPosition;
+        Vector3 endPos = -FirePoint.transform.right * weaponRange;
+        //Vector3 endPos = FirePoint.transform.forward * weaponRange;
+        //Debug.DrawRay(startPos, endPos);
+        if (Physics.Raycast(startPos, endPos, out RaycastHit rayHit, weaponRange, layerMask))
+        {
+            lineRenderer.SetPosition(0, startPos);
+            lineRenderer.SetPosition(1, rayHit.point);
+            //lineRenderer.SetPosition(1, rayHit.collider.gameObject.GetComponent<Transform>().transform.position);
+            Debug.Log(rayHit.collider.gameObject.name + " Hit");
+            HitZone hitZone = rayHit.collider.gameObject.GetComponent<HitZone>();
+            if (hitZone != null)
+                hitZone.TakeDamage(WeaponDamage);
+
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, endPos);
+        }
         StopCoroutine(FireFX());
         StartCoroutine(FireFX());
     }
 
     IEnumerator FireFX()
     {
-        Vector3 startPos = FirePoint.transform.position;
-        Vector3 endPos = -FirePoint.transform.right * weaponRange;
-        Debug.DrawRay(startPos, endPos);
-        if (Physics.Raycast(startPos, endPos, out RaycastHit rayHit, weaponRange, layerMask))
-        {
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, startPos);
-            lineRenderer.SetPosition(1, rayHit.point);
-            Debug.Log(rayHit.collider.gameObject.name + " TODO: Implement Damage");
-        }
-        else
-        {
-            lineRenderer.SetPosition(1, endPos);
-        }
+        lineRenderer.enabled = true;
         yield return new WaitForSeconds(fxDuration);
         lineRenderer.enabled = false;
     }

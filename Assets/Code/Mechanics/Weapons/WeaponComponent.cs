@@ -8,7 +8,7 @@ public abstract class WeaponComponent : MonoBehaviour
     private WeaponSchematic weaponSchematic;
     public WeaponSchematic WeaponSchematic { get => weaponSchematic; set => weaponSchematic = value; }
 
-    public abstract float WeaponDamage { get; set; }
+    public abstract int WeaponDamage { get; set; }
     public abstract float WeaponRange { get; set; }
     public abstract float WeaponCooldown { get; set; }
     public abstract float WeaponTimer { get; set; }

@@ -21,7 +21,7 @@ public class UnitActor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        OnUnitActorDeath.AddListener(UnitActorDeath);
     }
 
     // Update is called once per frame

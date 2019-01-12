@@ -35,16 +35,16 @@ public class Munition : MonoBehaviour
 
     private void OnTriggerEnter(Collider collisonObject)
     {
-        DamageComponent damageableHit = collisonObject.GetComponent<DamageComponent>();
-        if (damageableHit != null)
-        {
-            Debug.Log("Hit " + damageableHit.name);
-            if (owningFaction.CanHarm(damageableHit.Faction))
-            {
-                Debug.Log("Damaged " + damageableHit.name);
-                damageableHit.ApplyDamage(munitionDamage);
-            }
-        }
+        //DamageComponent damageableHit = collisonObject.GetComponent<DamageComponent>();
+        //if (damageableHit != null)
+        //{
+        //    Debug.Log("Hit " + damageableHit.name);
+        //    if (owningFaction.CanHarm(damageableHit.Faction))
+        //    {
+        //        Debug.Log("Damaged " + damageableHit.name);
+        //        damageableHit.ApplyDamage(munitionDamage);
+        //    }
+        //}
 
         Destroy(gameObject); // TODO: Deactivate and return to Pool
     }

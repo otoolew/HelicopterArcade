@@ -9,7 +9,7 @@ public class InfantryMovement : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        actor = animator.GetComponent<InfantryActor>();
+        actor = animator.GetComponentInParent<InfantryActor>();
         actor.NavigationAgent.NavAgent.isStopped = false;
         Debug.Log("Unit State: Moving!");
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class WeaponSchematic : ScriptableObject
 {
-    public float WeaponDamage;
+    public int WeaponDamage;
     public float WeaponRange;
     public float WeaponCooldown;
 

@@ -21,6 +21,10 @@ public class InfantryAim : StateMachineBehaviour
         actor.AimAtTarget();
         if (actor.Weapon.WeaponReady)
             animator.SetBool("WeaponReady", true);
+        else
+        {
+            animator.SetBool("WeaponReady", false);
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -24,18 +24,23 @@ public class InfantryActor : MonoBehaviour
     void Start()
     {
         targetController.Faction = GetComponent<UnitActor>().Faction;
+        targetController.OnAcquiredTarget.AddListener(HandleTargetAcquired);
+        targetController.OnLostTarget.AddListener(HandleTargetLost);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(targetController.CurrentTarget != null)
-        {
-            animator.SetBool("TargetInRange", true);
-        }  
         animator.SetFloat("MoveVelocity", navigationAgent.NavAgent.velocity.magnitude);
     }
-
+    public void HandleTargetAcquired(UnitActor target)
+    {
+        animator.SetBool("TargetInRange", true);
+    }
+    public void HandleTargetLost()
+    {
+        animator.SetBool("TargetInRange", false);
+    }
     public void AimAtTarget()
     {
         // Create a vector from the npc to the target.

@@ -16,8 +16,8 @@ TagManager:
   - PostProcessing
   - UnitActor
   - TargetController
-  - 
-  - 
+  - Damageable
+  - Munition
   - 
   - 
   - 
