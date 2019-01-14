@@ -26,6 +26,7 @@ public class TargetController : MonoBehaviour
     [SerializeField]
     private bool hadTarget;
     public bool HadTarget { get => hadTarget; set => hadTarget = value; }
+
     #endregion
     /// <summary>
     /// Fires when a targetable enters the target collider
@@ -237,6 +238,5 @@ public class TargetController : MonoBehaviour
             }
         }
     }
-    
 }
 

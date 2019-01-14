@@ -7,15 +7,10 @@ public class HealthController : MonoBehaviour
 {
     public int maxHealthPoints;
     public int totalHealthPoints;
-    public HitZone[] hitZones;
+
     public UnityEvent OnDeath;
     public void Start()
     {
-        hitZones = GetComponentsInChildren<HitZone>();
-        for (int i = 0; i < hitZones.Length; i++)
-        {
-            hitZones[i].OnHit.AddListener(ApplyDamage);
-        }
         if (OnDeath == null)
             OnDeath = new UnityEvent();
     }

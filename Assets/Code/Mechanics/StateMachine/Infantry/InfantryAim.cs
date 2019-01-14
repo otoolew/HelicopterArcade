@@ -11,7 +11,6 @@ public class InfantryAim : StateMachineBehaviour
     {
         actor = animator.GetComponent<InfantryActor>();
         actor.NavigationAgent.NavAgent.isStopped = true;
-        Debug.Log("Unit State: Aiming!");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

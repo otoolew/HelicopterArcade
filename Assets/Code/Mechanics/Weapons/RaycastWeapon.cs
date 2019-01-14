@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastWeaponComponent : WeaponComponent
+public class RaycastWeapon : WeaponComponent
 {
-    #region Properties and Variables
 
     [SerializeField]
-    private LineRenderer lineRenderer;
-    public LineRenderer LineRenderer { get => lineRenderer; set => lineRenderer = value; }
+    private WeaponSchematic weaponSchematic;
+    public WeaponSchematic WeaponSchematic { get => weaponSchematic; set => weaponSchematic = value; }
 
     [SerializeField]
     private int weaponDamage;
@@ -31,6 +30,10 @@ public class RaycastWeaponComponent : WeaponComponent
     public override bool WeaponReady { get => weaponReady; set => weaponReady = value; }
 
     [SerializeField]
+    private LineRenderer lineRenderer;
+    public LineRenderer LineRenderer { get => lineRenderer; set => lineRenderer = value; }
+
+    [SerializeField]
     private Transform firePoint;
     public Transform FirePoint { get => firePoint; set => firePoint = value; }
 
@@ -41,10 +44,6 @@ public class RaycastWeaponComponent : WeaponComponent
     [SerializeField]
     private LayerMask layerMask;
     public LayerMask LayerMask { get => layerMask; set => layerMask = value; }
-
-    #endregion
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -54,9 +53,23 @@ public class RaycastWeaponComponent : WeaponComponent
     // Update is called once per frame
     void Update()
     {
-        CooldownWeapon();
+        if (WeaponTimer >= 0)
+            CooldownWeapon();
     }
 
+    public override void CooldownWeapon()
+    {
+        if (WeaponTimer <= 0)
+        {
+            WeaponTimer = 0;
+            WeaponReady = true;
+        }
+        else
+        {
+            WeaponTimer -= Time.deltaTime;
+            WeaponReady = false;
+        }
+    }
     public override void FireWeapon()
     {
         Vector3 startPos = FirePoint.transform.localPosition;
@@ -81,17 +94,11 @@ public class RaycastWeaponComponent : WeaponComponent
         StopCoroutine(FireFX());
         StartCoroutine(FireFX());
     }
-
     IEnumerator FireFX()
     {
         lineRenderer.enabled = true;
         yield return new WaitForSeconds(fxDuration);
         lineRenderer.enabled = false;
-    }
-
-    public override void CooldownWeapon()
-    {
-        WeaponSchematic.CooldownWeapon(this);
     }
 
 }

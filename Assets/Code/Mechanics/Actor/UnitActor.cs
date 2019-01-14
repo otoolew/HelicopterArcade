@@ -16,12 +16,13 @@ public class UnitActor : MonoBehaviour
 
     #region Events and Handlers
     public event Action<UnitActor> removed;
-    public UnityEvent OnUnitActorDeath;
+
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        OnUnitActorDeath.AddListener(UnitActorDeath);
+        GetComponent<HealthController>().OnDeath.AddListener(UnitActorDeath);
+
     }
 
     // Update is called once per frame
@@ -33,6 +34,7 @@ public class UnitActor : MonoBehaviour
     private void UnitActorDeath()
     {
         dead = true;
+        GetComponent<Animator>().SetBool("IsDead", true);
         if (removed != null)
         {
             removed(this);
@@ -42,7 +44,7 @@ public class UnitActor : MonoBehaviour
 
     IEnumerator DeathSequence()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false);
     }
 }

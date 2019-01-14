@@ -11,7 +11,6 @@ public class InfantryIdle : StateMachineBehaviour
     {
         actor = animator.GetComponentInParent<InfantryActor>();
         actor.NavigationAgent.NavAgent.isStopped = true;
-        Debug.Log("Unit State: Idle!");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7904220386235781253}
   - component: {fileID: 7904220386235781251}
   - component: {fileID: 7904220386235781250}
+  - component: {fileID: 3991468417835449719}
   m_Layer: 0
   m_Name: SupplyTruck
   m_TagString: Untagged
@@ -68,11 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: {fileID: 11400000, guid: 13dbaf30f3284504fb8119e6c21de88c, type: 2}
   dead: 0
-  OnUnitActorDeath:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &7904220386235781252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +222,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 0}
   lineRenderer: {fileID: 0}
+--- !u!114 &3991468417835449719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904220386235781254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f986f14825a8fe34096ef09290dfd8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 0
+  totalHealthPoints: 0
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7904220386643129384
 GameObject:
   m_ObjectHideFlags: 0

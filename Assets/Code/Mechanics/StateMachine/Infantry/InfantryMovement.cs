@@ -11,7 +11,6 @@ public class InfantryMovement : StateMachineBehaviour
     {
         actor = animator.GetComponentInParent<InfantryActor>();
         actor.NavigationAgent.NavAgent.isStopped = false;
-        Debug.Log("Unit State: Moving!");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

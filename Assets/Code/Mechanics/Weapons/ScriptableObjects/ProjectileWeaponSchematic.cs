@@ -6,17 +6,16 @@ public class ProjectileWeaponSchematic : WeaponSchematic
 {
     public GameObject munitionPrefab;
 
-    public override void CooldownWeapon(WeaponComponent weaponComponent)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void FireWeapon(WeaponComponent weaponComponent)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void InitComponent(WeaponComponent weaponComponent)
+    {
+        throw new System.NotImplementedException();
+    }
+    public override void Cooldown(WeaponComponent weaponComponent)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Fire(WeaponComponent weaponComponent)
     {
         throw new System.NotImplementedException();
     }

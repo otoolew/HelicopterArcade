@@ -17,8 +17,8 @@ public class InfantryActor : MonoBehaviour
     public TargetController TargetController { get => targetController; set => targetController = value; }
 
     [SerializeField]
-    private WeaponComponent weapon;
-    public WeaponComponent Weapon { get => weapon; set => weapon = value; }
+    private InfantryWeapon weapon;
+    public InfantryWeapon Weapon { get => weapon; set => weapon = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +43,8 @@ public class InfantryActor : MonoBehaviour
     }
     public void AimAtTarget()
     {
+        if (targetController.CurrentTarget == null)
+            return;
         // Create a vector from the npc to the target.
         Vector3 rotVector = targetController.CurrentTarget.transform.position - transform.position;
 

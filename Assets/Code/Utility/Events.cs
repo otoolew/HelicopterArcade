@@ -17,4 +17,5 @@ public class Events
     [Serializable] public class AcquiredTarget : UnityEvent<UnitActor> { }
     [Serializable] public class LostTarget : UnityEvent { }
     [Serializable] public class HitZoneHit : UnityEvent<int> { }
+    [Serializable] public class UnitActorHit : UnityEvent<UnitActor> { }
 }
