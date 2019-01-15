@@ -7,7 +7,8 @@ public class Enums
 {
     [Serializable] public enum WayPointType { LINKED, RANDOM, LOOP }
     [Serializable] public enum StarshipType { FIGHTER, DEFENDER, MINER }
-    [Serializable] public enum PartComponentType { WEAPON, HULL, ENGINE, UTILITY };
-    [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC};
+    [Serializable] public enum PartComponentType { WEAPON, HULL, ENGINE, UTILITY }
+    [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC}
     [Serializable] public enum NavStatus { INROUTE, ARRIVED }
+    [Serializable] public enum RotorAxisRotation { X, Y, Z }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfantryAim : StateMachineBehaviour
+public class InfantryAttack : StateMachineBehaviour
 {
     InfantryActor actor;
 
@@ -19,11 +19,7 @@ public class InfantryAim : StateMachineBehaviour
         actor.NavigationAgent.NavAgent.isStopped = true;
         actor.AimAtTarget();
         if (actor.Weapon.WeaponReady)
-            animator.SetBool("WeaponReady", true);
-        else
-        {
-            animator.SetBool("WeaponReady", false);
-        }
+            actor.Weapon.FireWeapon();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

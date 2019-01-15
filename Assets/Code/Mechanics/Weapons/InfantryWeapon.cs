@@ -96,11 +96,11 @@ public class InfantryWeapon : WeaponComponent
             Vector3 targetDir = hitPoint - transform.position;
             Debug.DrawRay(ray.origin, targetDir);
 
-            UnitActor hitUnit = rayHit.collider.GetComponentInParent<UnitActor>();
+            HealthController hitUnit = rayHit.collider.GetComponentInParent<HealthController>();
             //Debug.Log( GetComponentInParent<UnitActor>().name + " Hit Target " + hitUnit.name );
             if (hitUnit != null)
             {
-                hitUnit.GetComponent<HealthController>().ApplyDamage(weaponDamage);
+                hitUnit.ApplyDamage(weaponDamage);
             }
 
         }

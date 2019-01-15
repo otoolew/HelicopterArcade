@@ -18,7 +18,7 @@ public class HelicopterController : MonoBehaviour
     public float maxVelocity;
     public float ThrustInput;
     public float RotationInput;
-
+    public float xRot, yRot, zRot;
     public Vector3 EulerAngleVelocity { get; set; }
     private Vector3 moveDirection = Vector3.zero;
     // Start is called before the first frame update
@@ -37,6 +37,7 @@ public class HelicopterController : MonoBehaviour
     void FixedUpdate()
     {
         HelicopterMovement();
+        //AutoLevel();
     }
     public void HelicopterMovement()
     {
@@ -49,13 +50,28 @@ public class HelicopterController : MonoBehaviour
             RigidBody.AddForce(transform.up * maxVelocity);
         if (downKey.KeyPressValue())
             RigidBody.AddForce(-transform.up * maxVelocity);
+        
         Quaternion rotation = Quaternion.Euler(EulerAngleVelocity * RotationInput * Time.deltaTime);
         RigidBody.MoveRotation(RigidBody.rotation * rotation);
 
         if (RigidBody.velocity.magnitude > maxVelocity)
         {
             RigidBody.velocity = Vector3.ClampMagnitude(RigidBody.velocity, 20f);
-        }
+        }        
     }
+    private void AutoLevel()
+    {
+        float stability = 1f;
+        float speed = 2.0f;
+    // Update is called once per frame
 
+        Vector3 predictedUp = Quaternion.AngleAxis(
+            RigidBody.angularVelocity.magnitude * Mathf.Rad2Deg * stability / speed,
+            RigidBody.angularVelocity
+        ) * transform.up;
+        Vector3 torqueVector = Vector3.Cross(predictedUp, Vector3.up);
+        RigidBody.AddTorque(torqueVector * speed * speed);
+    
+
+    }
 }

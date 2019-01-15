@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +21,10 @@ public class InfantryActor : MonoBehaviour
     private InfantryWeapon weapon;
     public InfantryWeapon Weapon { get => weapon; set => weapon = value; }
 
+    //public event Action<UnitActor> removed;
     // Start is called before the first frame update
     void Start()
-    {
+    {     
         targetController.Faction = GetComponent<UnitActor>().Faction;
         targetController.OnAcquiredTarget.AddListener(HandleTargetAcquired);
         targetController.OnLostTarget.AddListener(HandleTargetLost);
@@ -33,14 +35,8 @@ public class InfantryActor : MonoBehaviour
     {
         animator.SetFloat("MoveVelocity", navigationAgent.NavAgent.velocity.magnitude);
     }
-    public void HandleTargetAcquired(UnitActor target)
-    {
-        animator.SetBool("TargetInRange", true);
-    }
-    public void HandleTargetLost()
-    {
-        animator.SetBool("TargetInRange", false);
-    }
+
+
     public void AimAtTarget()
     {
         if (targetController.CurrentTarget == null)
@@ -58,5 +54,14 @@ public class InfantryActor : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 1f);
 
     }
-
+    public void HandleTargetAcquired(UnitActor target)
+    {
+        animator.SetBool("HasTarget", true);
+        //animator.SetTrigger("TargetInRange");
+    }
+    public void HandleTargetLost()
+    {
+        Debug.Log("Target Lost");
+        animator.SetBool("HasTarget", false);
+    }
 }

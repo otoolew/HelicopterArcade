@@ -108,13 +108,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 8733055730884941334}
-  upKey: {fileID: 11400000, guid: 5b759f4ef8fb89a48b33c572af69ca97, type: 2}
-  downKey: {fileID: 11400000, guid: 9dfcde08f452b59428768974944d9222, type: 2}
+  upKey: {fileID: 11400000, guid: 9dfcde08f452b59428768974944d9222, type: 2}
+  downKey: {fileID: 11400000, guid: 5b759f4ef8fb89a48b33c572af69ca97, type: 2}
   leftStrafeKey: {fileID: 11400000, guid: dabddaa5a52ba06489838a35a63a7890, type: 2}
   rightStrafeKey: {fileID: 11400000, guid: c04efa80795549e428e64e07a03a15ca, type: 2}
   maxVelocity: 30
   ThrustInput: 0
   RotationInput: 0
+  xRot: 0
+  yRot: 0
+  zRot: 0
 --- !u!1 &1565018548676380484
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +350,7 @@ GameObject:
   - component: {fileID: 7055792310755337308}
   - component: {fileID: 7055792310758671414}
   - component: {fileID: 7055792310757627824}
+  - component: {fileID: 4063434777868939388}
   m_Layer: 0
   m_Name: MainRotor
   m_TagString: Untagged
@@ -413,6 +417,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4063434777868939388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7055792310755625404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52f2b181f4dac64087870bebcb14247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateAxis: 1
+  currentRotationSpeed: 900
 --- !u!1 &7055792310755687348
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +442,7 @@ GameObject:
   - component: {fileID: 7055792310755343552}
   - component: {fileID: 7055792310758751900}
   - component: {fileID: 7055792310757590070}
+  - component: {fileID: 4334648781944257549}
   m_Layer: 0
   m_Name: TailRotor
   m_TagString: Untagged
@@ -490,6 +509,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4334648781944257549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7055792310755687348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52f2b181f4dac64087870bebcb14247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateAxis: 0
+  currentRotationSpeed: 900
 --- !u!1 &8389769618192137935
 GameObject:
   m_ObjectHideFlags: 0

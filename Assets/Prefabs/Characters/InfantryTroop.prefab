@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7582423897748912506}
   - component: {fileID: 613760205260680590}
   - component: {fileID: 8898660985008921858}
-  - component: {fileID: 8367918665030232762}
-  - component: {fileID: 4880427726256141704}
+  - component: {fileID: 8855507087298623977}
+  - component: {fileID: 1513292776763490928}
   - component: {fileID: 6992558908483708241}
   - component: {fileID: 1901189742536125689}
   - component: {fileID: 1481055274168130803}
@@ -75,7 +75,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8367918665030232762
+--- !u!114 &8855507087298623977
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,12 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: {fileID: 11400000, guid: 13dbaf30f3284504fb8119e6c21de88c, type: 2}
   dead: 0
-  OnUnitActorDeath:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
---- !u!114 &4880427726256141704
+--- !u!114 &1513292776763490928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,7 +158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   totalHealthPoints: 100
-  hitZones: []
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -1377,6 +1371,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3746751129027283618, guid: 9bde1d84431d51a449d223b2c055358e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6418304423845549202, guid: 9bde1d84431d51a449d223b2c055358e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1430,11 +1429,6 @@ PrefabInstance:
     - target: {fileID: 6418304423845549202, guid: 9bde1d84431d51a449d223b2c055358e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3746751129027283618, guid: 9bde1d84431d51a449d223b2c055358e,
-        type: 3}
-      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

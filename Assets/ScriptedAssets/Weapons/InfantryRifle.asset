@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31380a393dd511345b2a6c7c4f90c980, type: 3}
   m_Name: InfantryRifle
   m_EditorClassIdentifier: 
-  WeaponDamage: 50
+  WeaponDamage: 25
   WeaponRange: 50
   WeaponCooldown: 1

@@ -22,13 +22,6 @@ public class UnitActor : MonoBehaviour
     void Start()
     {
         GetComponent<HealthController>().OnDeath.AddListener(UnitActorDeath);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void UnitActorDeath()
