@@ -7,12 +7,20 @@ using UnityEngine.Events;
 public class UnitActor : MonoBehaviour
 {
     [SerializeField]
+    private Enums.UnitType unitType;
+    public Enums.UnitType UnitType { get => unitType; set => unitType = value; }
+
+    [SerializeField]
     private FactionAlignment faction;
     public FactionAlignment Faction { get => faction; set => faction = value; }
 
     [SerializeField]
     private bool dead;
     public bool Dead { get => dead; set => dead = value; }
+
+    [SerializeField]
+    private bool pooled;
+    public bool Pooled { get => pooled; set => pooled = value; }
 
     #region Events and Handlers
     public event Action<UnitActor> removed;
@@ -28,6 +36,7 @@ public class UnitActor : MonoBehaviour
     {
         dead = true;
         GetComponent<Animator>().SetBool("IsDead", true);
+        GetComponent<Animator>().Play("Dead");
         if (removed != null)
         {
             removed(this);

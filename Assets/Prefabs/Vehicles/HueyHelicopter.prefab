@@ -54,7 +54,11 @@ GameObject:
   m_Component:
   - component: {fileID: 710669402972504860}
   - component: {fileID: 8733055730884941334}
+  - component: {fileID: 856781095807443156}
   - component: {fileID: 3147659781814207234}
+  - component: {fileID: 8145947007648126130}
+  - component: {fileID: 1200500797715779814}
+  - component: {fileID: 8962694386221248513}
   m_Layer: 0
   m_Name: HueyHelicopter
   m_TagString: Untagged
@@ -76,6 +80,7 @@ Transform:
   - {fileID: 7055792310755302442}
   - {fileID: 9072341689766519978}
   - {fileID: 7505548815175190681}
+  - {fileID: 6382359076141335667}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,6 +100,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &856781095807443156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989185418549420926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2fba62e63d7b440b5c8c057582f172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitType: 1
+  faction: {fileID: 11400000, guid: 13dbaf30f3284504fb8119e6c21de88c, type: 2}
+  dead: 0
 --- !u!114 &3147659781814207234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c71c5b7af930e47bb76b9293f5947f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 8733055730884941334}
+  RigidBody: {fileID: 8733055730884941334}
   upKey: {fileID: 11400000, guid: 9dfcde08f452b59428768974944d9222, type: 2}
   downKey: {fileID: 11400000, guid: 5b759f4ef8fb89a48b33c572af69ca97, type: 2}
   leftStrafeKey: {fileID: 11400000, guid: dabddaa5a52ba06489838a35a63a7890, type: 2}
@@ -115,9 +135,59 @@ MonoBehaviour:
   maxVelocity: 30
   ThrustInput: 0
   RotationInput: 0
-  xRot: 0
-  yRot: 0
-  zRot: 0
+--- !u!114 &8145947007648126130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989185418549420926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f986f14825a8fe34096ef09290dfd8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 1000
+  totalHealthPoints: 1000
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1200500797715779814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989185418549420926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595b39df9b901124cad606ef347b5c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offerPickUpKey: {fileID: 11400000, guid: a7e1f76e1484561428cd29a28bec5dc6, type: 2}
+  debugDropKey: {fileID: 11400000, guid: fe01aa85a47a2ac49a582d01c7b5abf5, type: 2}
+  seatCapacity: 5
+  seatTotal: 0
+  unitDropPoint: {fileID: 6382359076141335667}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!136 &8962694386221248513
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989185418549420926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 7
+  m_Direction: 0
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &1565018548676380484
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +285,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 710669402972504860}
   cameraSettings: {fileID: 11400000, guid: 89f70bb3613ab2d4b9e59433d3eb30f7, type: 2}
+--- !u!1 &3753143569945342136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6382359076141335667}
+  m_Layer: 0
+  m_Name: DropPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6382359076141335667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3753143569945342136}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.72, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 710669402972504860}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5986010466383153732
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,12 +52,19 @@ public class NavigationAgent : MonoBehaviour
         navAgent.destination = waypointList[currentWaypoint].position;
 
     }
-    public void GoToPosition(Vector3 position)
+    public void ContinueToPosition(Vector3 position)
     {
         if (!navAgent.isActiveAndEnabled)
             return;
         navAgent.isStopped = false;
         navAgent.destination = position;
+    }
+    public void GoToPosition(Vector3 position)
+    {
+        if (!navAgent.isActiveAndEnabled)
+            return;
+        navAgent.isStopped = false;
+        navAgent.SetDestination(position);
     }
     public void ClearNavAgentPath()
     {

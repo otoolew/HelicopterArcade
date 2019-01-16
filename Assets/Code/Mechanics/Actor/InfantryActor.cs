@@ -2,9 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(UnitActor))]
 public class InfantryActor : MonoBehaviour
 {
+    [SerializeField]
+    private UnitActor unitActor;
+    public UnitActor UnitActor { get => unitActor; set => unitActor = value; }
+
     [SerializeField]
     private Animator animator;
     public Animator Animator { get => animator; set => animator = value; }
@@ -21,7 +25,6 @@ public class InfantryActor : MonoBehaviour
     private InfantryWeapon weapon;
     public InfantryWeapon Weapon { get => weapon; set => weapon = value; }
 
-    //public event Action<UnitActor> removed;
     // Start is called before the first frame update
     void Start()
     {     
@@ -33,9 +36,10 @@ public class InfantryActor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (unitActor.Dead)
+            return;
         animator.SetFloat("MoveVelocity", navigationAgent.NavAgent.velocity.magnitude);
     }
-
 
     public void AimAtTarget()
     {
@@ -57,11 +61,9 @@ public class InfantryActor : MonoBehaviour
     public void HandleTargetAcquired(UnitActor target)
     {
         animator.SetBool("HasTarget", true);
-        //animator.SetTrigger("TargetInRange");
     }
     public void HandleTargetLost()
     {
-        Debug.Log("Target Lost");
         animator.SetBool("HasTarget", false);
     }
 }
