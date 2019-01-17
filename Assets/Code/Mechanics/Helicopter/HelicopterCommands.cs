@@ -75,7 +75,7 @@ public class HelicopterCommands : MonoBehaviour
         {
             for (int i = 0; i < troops.Length; i++)
             {
-                InfantryActor unit = troops[i].GetComponentInParent<InfantryActor>();
+                Soldier unit = troops[i].GetComponentInParent<Soldier>();
                 if (unit != null)
                 {
                     unit.NavigationAgent.GoToPosition(transform.position);

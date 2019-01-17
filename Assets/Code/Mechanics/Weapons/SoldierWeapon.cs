@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfantryWeapon : WeaponComponent
+public class SoldierWeapon : WeaponComponent
 {
     #region Properties and Variables
     [SerializeField]

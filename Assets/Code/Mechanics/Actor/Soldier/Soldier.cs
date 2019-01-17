@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(UnitActor))]
-public class InfantryActor : MonoBehaviour
+[RequireComponent(typeof(NavigationAgent))]
+public class Soldier : MonoBehaviour
 {
     [SerializeField]
     private UnitActor unitActor;
@@ -22,12 +22,12 @@ public class InfantryActor : MonoBehaviour
     public TargetController TargetController { get => targetController; set => targetController = value; }
 
     [SerializeField]
-    private InfantryWeapon weapon;
-    public InfantryWeapon Weapon { get => weapon; set => weapon = value; }
+    private SoldierWeapon weapon;
+    public SoldierWeapon Weapon { get => weapon; set => weapon = value; }
 
     // Start is called before the first frame update
     void Start()
-    {     
+    {
         targetController.Faction = GetComponent<UnitActor>().Faction;
         targetController.OnAcquiredTarget.AddListener(HandleTargetAcquired);
         targetController.OnLostTarget.AddListener(HandleTargetLost);

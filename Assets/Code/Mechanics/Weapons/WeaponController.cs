@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    Ray ray;
-    RaycastHit rayHit = new RaycastHit();
     public LayerMask layerMask;
     [SerializeField]
     private WeaponComponent equippedWeapon;

@@ -11,5 +11,5 @@ public class Enums
     [Serializable] public enum ItemType { NONE, COLLECTABLE, EQUIPPABLE, MISC}
     [Serializable] public enum NavStatus { INROUTE, ARRIVED }
     [Serializable] public enum RotorAxisRotation { X, Y, Z }
-    [Serializable] public enum UnitType { Infantry, Helicopter, Vehicle }
+    [Serializable] public enum UnitType { Soldier, Helicopter, Vehicle }
 }

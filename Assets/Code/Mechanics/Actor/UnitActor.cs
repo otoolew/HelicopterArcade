@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+[RequireComponent(typeof(HealthController))]
 public class UnitActor : MonoBehaviour
 {
     [SerializeField]

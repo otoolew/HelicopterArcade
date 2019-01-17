@@ -82,9 +82,6 @@ public class RaycastWeapon : WeaponComponent
             lineRenderer.SetPosition(1, rayHit.point);
             //lineRenderer.SetPosition(1, rayHit.collider.gameObject.GetComponent<Transform>().transform.position);
             Debug.Log(rayHit.collider.gameObject.name + " Hit");
-            HitZone hitZone = rayHit.collider.gameObject.GetComponent<HitZone>();
-            if (hitZone != null)
-                hitZone.TakeDamage(WeaponDamage);
 
         }
         else

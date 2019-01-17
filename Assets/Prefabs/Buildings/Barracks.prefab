@@ -1538,10 +1538,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugSpawnKey: {fileID: 11400000, guid: 0e5c1056e68c50e40aa1bc8af18c20af, type: 2}
   faction: {fileID: 11400000, guid: 13dbaf30f3284504fb8119e6c21de88c, type: 2}
-  riflemanPrefab: {fileID: 8855507087298623977, guid: fa9b82cc3449e0b42bc5f1729ec1367f,
-    type: 3}
-  infantrySpawnPoint: {fileID: 5443232194156032393}
-  infantryReturnPoint: {fileID: 2619988200719421590}
+  riflemenPoolCount: 20
+  soldierAsset: {fileID: 11400000, guid: 7e36cced2ac182b4a87ce70a702dbc0e, type: 2}
+  soldierSpawnPoint: {fileID: 5443232194156032393}
+  soldierReturnPoint: {fileID: 2619988200719421590}
+  soldierList: []
 --- !u!1 &5326492646761811647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1906,6 +1907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2619988200719421590}
+  - component: {fileID: 996337793593066615}
   m_Layer: 0
   m_Name: TroopReturn
   m_TagString: Untagged
@@ -1927,6 +1929,19 @@ Transform:
   m_Father: {fileID: 5484557563400268388}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &996337793593066615
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450320457000532267}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &6477777313901292657
 GameObject:
   m_ObjectHideFlags: 0

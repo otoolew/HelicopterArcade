@@ -9,8 +9,8 @@ using UnityEngine;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private PauseMenu _pauseMenu;
-    [SerializeField] private GameOverMenu _gameOverMenu;
+    [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private GameOverMenu gameOverMenu;
 
     private void Start()
     {       
@@ -27,19 +27,19 @@ public class UIManager : MonoBehaviour
     {
         if(currentState == GameManager.GameState.RUNNING)
         {
-            _pauseMenu.gameObject.SetActive(false);
-            _gameOverMenu.gameObject.SetActive(false);
+            pauseMenu.gameObject.SetActive(false);
+            gameOverMenu.gameObject.SetActive(false);
             return;
         }
 
         if(currentState == GameManager.GameState.PAUSED)
         {
-            _pauseMenu.gameObject.SetActive(true);
+            pauseMenu.gameObject.SetActive(true);
             return;
         }
         if(currentState == GameManager.GameState.GAMEOVER)
         {
-            _gameOverMenu.gameObject.SetActive(true);
+            gameOverMenu.gameObject.SetActive(true);
             return;
         }
 
